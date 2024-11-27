@@ -214,3 +214,35 @@ while True:
         print("Верхній елемент:", stack.peek())
     elif choice == 7:
         break
+
+#task4
+class DynamicStack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, value):
+        self.stack.append(value)
+
+    def pop(self):
+        if self.stack:
+            return self.stack.pop()
+        else:
+            print("Стек порожній!")
+            return None
+
+    def count(self):
+        return len(self.stack)
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def clear(self):
+        self.stack = []
+
+    def peek(self):
+        if self.stack:
+            return self.stack[-1]
+        else:
+            print("Стек порожній!")
+            return None
+
