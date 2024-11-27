@@ -158,3 +158,59 @@ while True:
         dll.replace(old_value, new_value)
     elif choice == 6:
         break
+
+#task3
+class FixedStack:
+    def __init__(self, size):
+        self.stack = []
+        self.size = size
+
+    def push(self, value):
+        if len(self.stack) < self.size:
+            self.stack.append(value)
+        else:
+            print("Стек переповнений!")
+
+    def pop(self):
+        if self.stack:
+            return self.stack.pop()
+        else:
+            print("Стек порожній!")
+            return None
+
+    def count(self):
+        return len(self.stack)
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def clear(self):
+        self.stack = []
+
+    def peek(self):
+        if self.stack:
+            return self.stack[-1]
+        else:
+            print("Стек порожній!")
+            return None
+
+stack = FixedStack(5)
+while True:
+    print("\n1. Помістити елемент у стек\n2. Виштовхнути елемент зі стеку\n3. Показати кількість елементів\n4. Перевірити чи порожній стек\n5. Очистити стек\n6. Показати верхній елемент\n7. Вийти")
+    choice = int(input("Ваш вибір: "))
+    if choice == 1:
+        value = int(input("Введіть значення: "))
+        stack.push(value)
+    elif choice == 2:
+        print("Видалено:", stack.pop())
+    elif choice == 3:
+        print("Кількість елементів:", stack.count())
+    elif choice == 4:
+        print("Стек порожній" if stack.is_empty() else "Стек не порожній")
+    elif choice == 5:
+        stack.clear()
+        print("Стек очищено!")
+    elif choice == 6:
+        print("Верхній елемент:", stack.peek())
+    elif choice == 7:
+        break
