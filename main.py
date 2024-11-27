@@ -246,3 +246,68 @@ class DynamicStack:
             print("Стек порожній!")
             return None
 
+#HW_Data_Structures
+def display_menu():
+    print("\nМеню:")
+    print("1. Додати нове число в список")
+    print("2. Видалити всі входження числа зі списку")
+    print("3. Показати вміст списку")
+    print("4. Перевірити чи є значення в списку")
+    print("5. Замінити значення у списку")
+    print("6. Вийти")
+
+numbers = list(map(int, input("Введіть набір чисел через пробіл: ").split()))
+
+while True:
+    display_menu()
+    choice = int(input("Ваш вибір: "))
+
+    if choice == 1:
+        number = int(input("Введіть число: "))
+        if number in numbers:
+            print("Число вже є у списку!")
+        else:
+            numbers.append(number)
+            print("Число додано.")
+
+    elif choice == 2:
+        number = int(input("Введіть число для видалення: "))
+        numbers = [n for n in numbers if n != number]
+        print("Число видалено, якщо воно було у списку.")
+
+    elif choice == 3:
+        order = input("Показати список (з початку/з кінця)? (початок/кінець): ").strip().lower()
+        if order == "початок":
+            print("Список:", numbers)
+        elif order == "кінець":
+            print("Список (з кінця):", numbers[::-1])
+        else:
+            print("Неправильний вибір!")
+
+    elif choice == 4:
+        number = int(input("Введіть число для перевірки: "))
+        if number in numbers:
+            print("Число є у списку.")
+        else:
+            print("Числа немає у списку.")
+
+    elif choice == 5:
+        old_value = int(input("Введіть значення для заміни: "))
+        new_value = int(input("Введіть нове значення: "))
+        replace_all = input("Замінити всі входження? (так/ні): ").strip().lower()
+        if replace_all == "так":
+            numbers = [new_value if n == old_value else n for n in numbers]
+        elif replace_all == "ні":
+            for i in range(len(numbers)):
+                if numbers[i] == old_value:
+                    numbers[i] = new_value
+                    break
+        else:
+            print("Неправильний вибір!")
+
+    elif choice == 6:
+        print("Програма завершена.")
+        break
+
+    else:
+        print("Неправильний вибір! Спробуйте знову.")
