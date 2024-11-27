@@ -1,35 +1,76 @@
 #task1
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
 class LinkedList:
-    head = None
-    class Node:
-        element = None
-        next_node = None
+    def __init__(self):
+        self.head = None
 
-        def __init__(self, element, next_node = None):
-            self.element = element
-            self.next_node = next_node
-    def append(self, element):
+    def add(self, value):
+        new_node = Node(value)
         if not self.head:
-            self.head = self.Node(element)
-            return element
-        node = self.head
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
 
-        while node.next_node:
-            node = node.next_node
+    def remove(self, value):
+        if not self.head:
+            return
+        if self.head.value == value:
+            self.head = self.head.next
+            return
+        current = self.head
+        while current.next and current.next.value != value:
+            current = current.next
+        if current.next:
+            current.next = current.next.next
 
-        node.next_node = self.Node(element)
+    def contains(self, value):
+        current = self.head
+        while current:
+            if current.value == value:
+                return True
+            current = current.next
+        return False
 
-    def out(self):
-        node = self.head
+    def replace(self, old_value, new_value):
+        current = self.head
+        while current:
+            if current.value == old_value:
+                current.value = new_value
+                return
+            current = current.next
 
-        while node.next_node:
-            print(node.element)
-            node = node.next_node
-        print(node.element)
+    def display(self):
+        current = self.head
+        while current:
+            print(current.value, end=" -> ")
+            current = current.next
+        print("None")
 
 linked_list = LinkedList()
-users_input = (input("Введіть набір чисел: "))
-numbers = map(int, users_input.split())
-for num in numbers:
-    linked_list.append(num)
-linked_list.out()
+while True:
+    print("\n1. Додати елемент у список\n2. Видалити елемент зі списку\n3. Показати вміст списку\n4. Перевірити, чи є значення у списку\n5. Замінити значення у списку\n6. Вийти")
+    choice = int(input("Ваш вибір: "))
+    if choice == 1:
+        value = int(input("Введіть значення: "))
+        linked_list.add(value)
+    elif choice == 2:
+        value = int(input("Введіть значення: "))
+        linked_list.remove(value)
+    elif choice == 3:
+        linked_list.display()
+    elif choice == 4:
+        value = int(input("Введіть значення: "))
+        print("Знайдено" if linked_list.contains(value) else "Не знайдено")
+    elif choice == 5:
+        old_value = int(input("Старе значення: "))
+        new_value = int(input("Нове значення: "))
+        linked_list.replace(old_value, new_value)
+    elif choice == 6:
+        break
